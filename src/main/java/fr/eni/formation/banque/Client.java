@@ -8,19 +8,18 @@ import javax.persistence.Id;
 @Entity
 public class Client {
 
-	private String nom="";
-	
-	private String prenom="";
+	private String nom = "";
 
-	@Id @GeneratedValue(strategy=GenerationType.AUTO) // GenerationType.Identity
+	private String prenom = "";
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO) // GenerationType.Identity
 	private long idClient;
-	
-
 
 	public Client() {
-		
+
 	}
-	
+
 	public Client(String nom, String prenom) {
 		super();
 		this.nom = nom;
@@ -42,7 +41,7 @@ public class Client {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	
+
 	public long getIdClient() {
 		return idClient;
 	}
@@ -55,8 +54,5 @@ public class Client {
 	public String toString() {
 		return String.format("Client  = [nom= %s, prenom= %s]", nom, prenom);
 	}
-	
-	
-	
-	
+
 }
