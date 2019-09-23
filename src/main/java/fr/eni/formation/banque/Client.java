@@ -1,12 +1,20 @@
 package fr.eni.formation.banque;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class Client {
 
 	private String nom;
 	
 	private String prenom;
 
+	@Id @GeneratedValue(strategy=GenerationType.AUTO) // GenerationType.Identity
+	private long idClient;
 	
+
+
 	public Client() {
 		
 	}
@@ -31,6 +39,14 @@ public class Client {
 
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+	
+	public long getIdClient() {
+		return idClient;
+	}
+
+	public void setIdClient(long idClient) {
+		this.idClient = idClient;
 	}
 
 	@Override
