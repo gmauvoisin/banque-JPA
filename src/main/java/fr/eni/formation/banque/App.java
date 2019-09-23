@@ -19,7 +19,6 @@ public class App
         EntityManager em = emf.createEntityManager();
         
         System.out.println("Ouverture d'une connexion à la base MySql");
-        
         em.close();
         emf.close();
         

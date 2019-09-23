@@ -22,8 +22,8 @@ public class Client {
 
 	public Client(String nom, String prenom) {
 		super();
-		this.nom = nom;
-		this.prenom = prenom;
+		setNom(nom);
+		setPrenom(prenom);
 	}
 
 	public String getNom() {
@@ -52,7 +52,7 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return String.format("Client  = [nom= %s, prenom= %s]", nom, prenom);
+		return String.format("Client  = [nom= %s, prenom= %s]", getNom(), getPrenom());
 	}
 
 }

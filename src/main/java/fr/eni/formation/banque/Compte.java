@@ -26,11 +26,10 @@ public class Compte {
 
 	}
 
-	public Compte(String numero, String intitule, long idCompte) {
+	public Compte(String numero, String intitule) {
 		super();
 		setNumero(numero);
 		setIntitule(intitule);
-		setIdCompte(idCompte);
 	}
 	
 	
