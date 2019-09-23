@@ -6,7 +6,7 @@
 	
 	<persistence-unit name="localhost-mysql-banque" >
  
-		<!-- <class>fr.eni.formation.banque.Client</class> -->
+		<class>fr.eni.formation.banque.Client</class>
 
 		<properties>
 		

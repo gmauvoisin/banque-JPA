@@ -1,14 +1,16 @@
 package fr.eni.formation.banque;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Client {
 
-	private String nom;
+	private String nom="";
 	
-	private String prenom;
+	private String prenom="";
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO) // GenerationType.Identity
 	private long idClient;
