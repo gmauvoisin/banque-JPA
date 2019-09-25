@@ -2,64 +2,95 @@ package fr.eni.formation.banque.app;
 
 import java.time.LocalDate;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceException;
-
 import fr.eni.formation.banque.Client;
 import fr.eni.formation.banque.Compte;
-import fr.eni.formation.banque.Operation;
-import fr.eni.formation.banque.jpa.JpaUtil;
+import fr.eni.formation.banque.dao.ClientDao;
+import fr.eni.formation.banque.dao.CompteDao;
 
 public class App {
 	public static void main(String[] args) {
 
-		System.out.println("Ouverture d'une connexion à la base MySql");
+		ClientDao daoClient = new fr.eni.formation.banque.jpa.ClientDao();
+		CompteDao daoCompte = new fr.eni.formation.banque.jpa.CompteDao();
+		
 
-		EntityManager em = JpaUtil.getEntityManager();
-
-		EntityTransaction tx = null;
-
-		// Enregistrement de données en base
-		try {
-			tx = em.getTransaction();
-			tx.begin();
-			em.persist(new Client("Jean", "Paul"));
-			em.persist(new Client("Mauvoisin", "Guillaume"));
-			em.persist(new Client("Vermont", "Clément"));
-			em.persist(new Operation(LocalDate.now(), "Remboursement Fred", -50.0));
-			em.persist(new Compte("58967423", "Compte Courant"));
-			tx.commit();
-		} catch (Exception e) {
-			tx.rollback();
-			e.printStackTrace();
-		}
-
+		
 		/*
-		 * Recherche de données en base avec le find et mise à jour d'une donnée en
-		 * utilisant le setter
+		 * *****************************
+		 * CREATION DES CLIENTS EN TABLE
+		 * *****************************
 		 */
-		Client cli1 = null;
-		Compte cpt1 = null;
+		daoClient.create("Jean", "Pierre");
+		daoClient.create("René", "Denis");
+		daoClient.create("Mauvoisin", "Guillaume");
+		Client cli1 = daoClient.create("Hallyday", "Johnny");
+		Client cli2 = daoClient.read(3L);
+		
+		/*
+		 * *****************************
+		 * CREATION DES COMPTES EN TABLE
+		 * *****************************
+		 */
+		daoCompte.create("69874521", "Compte chèque");
+		daoCompte.create("87932001", "PEL");
+		daoCompte.create("99932877", "Livret A");
+		Compte cpt1 = daoCompte.create("98741111", "Livret epargne");
+		Compte cpt2 = daoCompte.read(1L);
+		Compte cpt3 = daoCompte.read(2L);
+		
+		/*
+		 * Attribution d'un ou plusieurs comptes à un titulaire
+		 */
+		daoClient.addCompte(cli1, cpt1);
+		daoClient.addCompte(cli2, cpt2, cpt3);
+		
+		/*
+		 * Création des opérations pour certains comptes
+		 */
+		daoCompte.addOperations(cpt3, LocalDate.now(), "Remboursement Crédit", -600.0);
+		daoCompte.addOperations(cpt3, LocalDate.now(), "Remboursement Amigo", 20.0);
+		daoCompte.addOperations(cpt3, LocalDate.now(), "TAN", -14.13);
+		daoCompte.addOperations(cpt1, LocalDate.now(), "EDF", -104.56);
+		daoCompte.addOperations(cpt1, LocalDate.now(), "Restau", -64.87);
+		daoCompte.addOperations(cpt1, LocalDate.now(), "CAF", 145.21);
 
-		try {
-			cli1 = em.find(Client.class, 1L);
-			cpt1 = em.find(Compte.class, 1L);
-			System.out.println(cli1.toString());
-			System.out.println(cpt1.toString());
-			tx = em.getTransaction();
-			tx.begin();
-			cli1.setNom("Koala");
-			em.remove(cpt1);
-			tx.commit();
-			System.out.println(cli1.toString());
-			System.out.println(cpt1.toString());
-		} catch (PersistenceException e) {
-			tx.rollback();
-			e.printStackTrace();
-		}
+		
+		System.err.println("READ de tous les clients");
+		daoClient.readAll().forEach(System.out::println);
+		System.err.println("READ de tous les comptes");
+		daoCompte.readAll().forEach(System.out::println);
 
-		JpaUtil.close();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		Client cli1 = daoClient.read(1L);
+//		System.err.println("READ sur client1");
+//		System.out.println(cli1);
+//
+//		Compte cpt1 = daoCompte.read(1L);
+//		System.err.println("READ sur compte1");
+//		System.out.println(cpt1);
+//		System.err.println("READ sur compte2");
+//		Compte cpt2 = daoCompte.read(2L);
+//		System.out.println(cpt2);
+//		
+//
+//		System.err.println("READ de tous les clients qui s'appellent Jean");
+//		daoClient.readNom("Jean").forEach(System.out::println);
+		
+//		System.err.println("READ de tous les comptes qui contiennent \"32\" ");
+//		daoCompte.readNumero("32").forEach(System.out::println);
+
+//		System.err.println(" READ du compte 87932001");
+//		System.out.println(daoCompte.readNumeroEntier("87932001"));
+		//daoClient.delete(5L);
 
 	}
 }

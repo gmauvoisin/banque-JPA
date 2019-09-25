@@ -19,7 +19,7 @@ public class Operation {
 	private double montant;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // GenerationType.Identity
+	@GeneratedValue(strategy = GenerationType.IDENTITY ) // GenerationType.Identity
 	private long idOperation;
 
 	public Operation() {

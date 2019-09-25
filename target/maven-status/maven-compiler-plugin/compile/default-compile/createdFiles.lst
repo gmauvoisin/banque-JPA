@@ -1,5 +1,10 @@
+fr\eni\formation\banque\app\App2.class
 fr\eni\formation\banque\jpa\JpaUtil.class
-fr\eni\formation\banque\App.class
+fr\eni\formation\banque\dao\ClientDao.class
+fr\eni\formation\banque\jpa\CompteDao.class
+fr\eni\formation\banque\dao\CompteDao.class
+fr\eni\formation\banque\jpa\ClientDao.class
 fr\eni\formation\banque\Client.class
 fr\eni\formation\banque\Operation.class
+fr\eni\formation\banque\app\App.class
 fr\eni\formation\banque\Compte.class
