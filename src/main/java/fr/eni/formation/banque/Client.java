@@ -13,7 +13,7 @@ public class Client {
 	private String prenom = "";
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO) // GenerationType.Identity
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // GenerationType.Identity
 	private long idClient;
 
 	public Client() {

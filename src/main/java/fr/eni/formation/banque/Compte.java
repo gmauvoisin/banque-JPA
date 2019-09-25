@@ -19,7 +19,7 @@ public class Compte {
 	private double solde;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO) // GenerationType.Identity
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // GenerationType.Identity
 	private long idCompte;
 
 	public Compte() {
