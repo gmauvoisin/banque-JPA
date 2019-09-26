@@ -10,6 +10,8 @@ public interface CompteDao {
 
 	Compte create(String numero, String intitule);
 	
+	Compte create(String numero, String intitule, double taux);
+	
 	Compte read(long id);
 	
 	Stream <Compte> readNumero(String nom);

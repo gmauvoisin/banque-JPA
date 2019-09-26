@@ -11,6 +11,9 @@ import javax.persistence.Id;
 @Entity
 public class Operation {
 
+	/*
+	 * ************************ Les attributs ************************
+	 */
 	private LocalDate date;
 
 	private String libelle;
@@ -19,9 +22,12 @@ public class Operation {
 	private double montant;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY ) // GenerationType.Identity
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // GenerationType.Identity
 	private long idOperation;
 
+	/*
+	 * ************************ Les constructeurs ************************
+	 */
 	public Operation() {
 
 	}
@@ -33,6 +39,9 @@ public class Operation {
 		setMontant(montant);
 	}
 
+	/*
+	 * ************************ Les accesseurs ************************
+	 */
 	public LocalDate getDate() {
 		return date;
 	}
@@ -67,6 +76,9 @@ public class Operation {
 		this.idOperation = idOperation;
 	}
 
+	/**
+	 * Surcharge du toString
+	 */
 	@Override
 	public String toString() {
 		return String.format("Operation [date= %s , libelle= %s, montant = %s , idOperation = %s]", date, getLibelle(),

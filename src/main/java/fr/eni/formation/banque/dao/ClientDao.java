@@ -7,7 +7,7 @@ import fr.eni.formation.banque.Compte;
 
 public interface ClientDao {
 
-	Client create(String nom, String prenom);
+	Client create(String nom, String prenom, String... adresse);
 	
 	Client read(long id);
 	

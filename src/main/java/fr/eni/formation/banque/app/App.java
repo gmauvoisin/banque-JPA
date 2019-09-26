@@ -12,38 +12,40 @@ public class App {
 
 		ClientDao daoClient = new fr.eni.formation.banque.jpa.ClientDao();
 		CompteDao daoCompte = new fr.eni.formation.banque.jpa.CompteDao();
-		
+		CompteDao daoLivret = new fr.eni.formation.banque.jpa.CompteDao();
 
-		
 		/*
 		 * *****************************
-		 * CREATION DES CLIENTS EN TABLE
+		 *  CREATION DES CLIENTS EN TABLE
 		 * *****************************
 		 */
-		daoClient.create("Jean", "Pierre");
+		daoClient.create("Jean", "Pierre", "Boston");
 		daoClient.create("René", "Denis");
-		daoClient.create("Mauvoisin", "Guillaume");
+		daoClient.create("Mauvoisin", "Guillaume", "Mont-de-Marsan");
 		Client cli1 = daoClient.create("Hallyday", "Johnny");
 		Client cli2 = daoClient.read(3L);
-		
+
 		/*
-		 * *****************************
+		 * ***************************** 
 		 * CREATION DES COMPTES EN TABLE
 		 * *****************************
 		 */
 		daoCompte.create("69874521", "Compte chèque");
 		daoCompte.create("87932001", "PEL");
 		daoCompte.create("99932877", "Livret A");
+		//Création d'un livret
+		daoLivret.create("99999999", "Livret A", 0.75);
 		Compte cpt1 = daoCompte.create("98741111", "Livret epargne");
 		Compte cpt2 = daoCompte.read(1L);
 		Compte cpt3 = daoCompte.read(2L);
-		
+		Compte cpt4 = daoCompte.read(4L);
+
 		/*
 		 * Attribution d'un ou plusieurs comptes à un titulaire
 		 */
 		daoClient.addCompte(cli1, cpt1);
-		daoClient.addCompte(cli2, cpt2, cpt3);
-		
+		daoClient.addCompte(cli2, cpt2, cpt3, cpt4);
+
 		/*
 		 * Création des opérations pour certains comptes
 		 */
@@ -54,12 +56,13 @@ public class App {
 		daoCompte.addOperations(cpt1, LocalDate.now(), "Restau", -64.87);
 		daoCompte.addOperations(cpt1, LocalDate.now(), "CAF", 145.21);
 
-		
 		System.err.println("READ de tous les clients");
 		daoClient.readAll().forEach(System.out::println);
 		System.err.println("READ de tous les comptes");
 		daoCompte.readAll().forEach(System.out::println);
 
+		
+		
 		
 		
 		
@@ -84,13 +87,13 @@ public class App {
 //
 //		System.err.println("READ de tous les clients qui s'appellent Jean");
 //		daoClient.readNom("Jean").forEach(System.out::println);
-		
+
 //		System.err.println("READ de tous les comptes qui contiennent \"32\" ");
 //		daoCompte.readNumero("32").forEach(System.out::println);
 
 //		System.err.println(" READ du compte 87932001");
 //		System.out.println(daoCompte.readNumeroEntier("87932001"));
-		//daoClient.delete(5L);
+		// daoClient.delete(5L);
 
 	}
 }

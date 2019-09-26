@@ -16,15 +16,23 @@ public class ClientDao implements fr.eni.formation.banque.dao.ClientDao {
 	EntityTransaction tx = null;
 
 	@Override
-	public Client create(String nom, String prenom) {
+	public Client create(String nom, String prenom, String... adresse) {
+		
 		Client client = null;
+		
 		try {
 			tx = em.getTransaction();
 			tx.begin();
-
-			client = new Client(nom, prenom);
+			
+			if (adresse.length > 0) {
+				client = new Client(nom, prenom, adresse[0]);
+			} else {
+				client = new Client(nom, prenom);
+			}
+			
 			em.persist(client);
 			tx.commit();
+			
 		} catch (Exception e) {
 			tx.rollback();
 			e.getStackTrace();

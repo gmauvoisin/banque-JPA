@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import fr.eni.formation.banque.Compte;
+import fr.eni.formation.banque.Livret;
 import fr.eni.formation.banque.Operation;
 
 public class CompteDao implements fr.eni.formation.banque.dao.CompteDao {
@@ -25,6 +26,23 @@ public class CompteDao implements fr.eni.formation.banque.dao.CompteDao {
 			tx = em.getTransaction();
 			tx.begin();
 			compte = new Compte(numero, intitule);
+			em.persist(compte);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.getStackTrace();
+		}
+		return compte;
+	}
+	
+	
+	@Override
+	public Compte create(String numero, String intitule, double taux) {
+		Compte compte = null;
+		try {
+			tx = em.getTransaction();
+			tx.begin();
+			compte = new Livret(numero, intitule, taux);
 			em.persist(compte);
 			tx.commit();
 		} catch (Exception e) {
@@ -77,11 +95,14 @@ public class CompteDao implements fr.eni.formation.banque.dao.CompteDao {
 			ope = new Operation(date, libelle, montant);
 			compte.getOperations().add(ope);
 			tx.commit();
+			em.refresh(compte);
 		} catch (Exception e) {
 			tx.rollback();
 			e.getStackTrace();
 		}
 		return ope;
 	}
+
+
 
 }
